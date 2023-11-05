@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "f9f3614e-b3ff-4ef3-96a7-fc28a0d26984",
+		"name": "External Data FIles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12350518"
+	},
+	"item": [
+		{
+			"name": "Generate reference",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/uuid",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Shuld contain reference id\", function (){\r",
+							"    pm.expect(response.json.referenceId).to.eql(pm.globals.get(\"referenceid\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Shuld contain the customer id\", function (){\r",
+							"    pm.expect(response.json.customerId).to.eql(pm.iterationData.get(\"customerId\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Shuld contain the product id\", function (){\r",
+							"    pm.expect(response.json.productId).to.eql(iterationData.get('productId'))\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"referenceId\": \"{{referenceId}}\",\r\n    \"customerId\": \"{{customerId}}\",\r\n    \"productId\": \"{{productId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "httpbin.org/uuid",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is\" + pm.iterationData.get('expectedStatus'), function () {\r",
+							"    pm.response.to.have.status(pm.iterationData.get('expectedStatus'));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/status/{{status}}",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"status",
+						"{{status}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
