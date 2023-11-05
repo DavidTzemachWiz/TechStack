@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "5944d812-85ae-4eec-96cb-cc7e84e55454",
+		"name": "Lesson 1 -Requests (Get, Post, Patch , Delete)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12350518"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "Get all products",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();\r",
+									"console.log(\"Test staus is UP and Status code is 200\")"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"UP\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all products by category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/?category=coffee",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "coffee"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.clear()\r",
+									"\r",
+									"const serverResponse = pm.response.json();\r",
+									"console.log(serverResponse.id)\r",
+									"\r",
+									"//Validation 1 - Test the response, without it there is no need to continue \r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validation 2 - Validate that the server response is a valid JSON object\r",
+									"pm.test('Validate JSON object/array was received', function(){\r",
+									"    pm.expect([serverResponse]).to.be.an('array');\r",
+									"    //or\r",
+									"    //pm.expect(serverResponse[0]).to.be.an('object');\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate Item ID = 4643\", function () {\r",
+									"    pm.expect(serverResponse.id).to.eql(4643);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate category = coffee\", function () {\r",
+									"    pm.expect(serverResponse.category).contain('coffee');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate price is lower than 50\", function () {\r",
+									"    pm.expect(serverResponse.price).lessThan(50)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate item in stock\", function () {\r",
+									"    pm.expect(serverResponse.inStock).eq(true)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/4643",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								"4643"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Path Variable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/:product:id",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								":product:id"
+							],
+							"variable": [
+								{
+									"key": "product:id",
+									"value": "4643"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								""
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "EB_CXNNp1AamJdCbdopS2",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/orders",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Create a Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add product to cart using JSON",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": [\r\n        \"2585\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items"
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registar API client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"clientName\": \"Access Token for Test Enviornment\",\r\n   \"clientEmail\": \"David1@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/api-clients",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"api-clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\": \"EB_CXNNp1AamJdCbdopS2\",\r\n    \"customerName\": \"{{$randomUserName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/orders?cartID=KeJoeB2z8PCTBpp5gM0WM",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "cartID",
+									"value": "KeJoeB2z8PCTBpp5gM0WM"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PATCH",
+			"item": [
+				{
+					"name": "Update Product Quantity",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items/:itemId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								},
+								{
+									"key": "itemId",
+									"value": "675140357"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an order comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"comment\": \"Pickup at 2:00 AM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/orders/:orderId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"orders",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "uGSaRboOPlOpaamr5YD0H"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 8 - Update an order name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"customerName\": \"David Tzemach\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/orders/:orderId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"orders",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "{{_"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Delete item in cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items/:itemId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "328036492"
+								},
+								{
+									"key": "itemId",
+									"value": "2585"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HEAD",
+			"item": [
+				{
+					"name": "Get all products",
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/?results=6",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "results",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL - Grocery-Store",
+			"value": "https://simple-grocery-store-api.glitch.me"
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cartId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

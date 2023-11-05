@@ -1,0 +1,2078 @@
+{
+	"info": {
+		"_postman_id": "034ed710-b365-40cc-82b2-261e4ecd4167",
+		"name": "API Assignments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12350518"
+	},
+	"item": [
+		{
+			"name": "Valentine's Book List API",
+			"item": [
+				{
+					"name": "Verify that the API is working",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Createing a variable\r",
+									"\r",
+									"pm.collectionVariables.set('firstName', 'David Tzemach')"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "{{API BaseURL }}",
+							"host": [
+								"{{API BaseURL }}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book List with API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Value Checking\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Value Checking\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.num_results).to.eql(17);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://valentines-book-list.glitch.me/books/lists?api-key=8fhg93xkjd38fhg834jdfgjd&list=non-fiction",
+							"protocol": "https",
+							"host": [
+								"valentines-book-list",
+								"glitch",
+								"me"
+							],
+							"path": [
+								"books",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "api-key",
+									"value": "8fhg93xkjd38fhg834jdfgjd"
+								},
+								{
+									"key": "list",
+									"value": "non-fiction"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "# Valentine's Book List API\n\nThis API allows you to view the books that Valentine has read or plans to read.\n\nThe API is available at `https://valentines-book-list.glitch.me`\n\n## Endpoints\n\n- [Status](#Status)\n- [Books](#Books)\n    - [Get a book list](#Get-a-book-list)\n\n## Status\n\n**`GET /status`**\n\nReturns the status of the API. Example response:\n\n```\n{\n    \"status\": \"UP\"\n}\n\n ```\n\nStatus `UP` indicates that the API is running as expected.\n\nNo response or any other response indicates that the API is not functioning correctly.\n\n## Books\n\n### Get a book list\n\n**`GET /books/lists`**\n\nReturns a list of books. Requires authentication.\n\nThis endpoint uses pagination to handle the returned results. Paginating the results ensures responses are easier to handle. Each response will indicate the total number of results, the current page, and the total number of pages.\n\n**Parameters**\n\n| Name | Type | In | Required | Description |\n| --- | --- | --- | --- | --- |\n| `list` | string | query | Yes | Specifies the list you want to retrieve. Must be one of: favourite-books, non-fiction, wishlist, fiction. |\n| `page` | integer | query | No | Specifies the page you wish to retrive from the entire result set. |\n\n**Status codes**\n\n| Status code | Description |\n| --- | --- |\n| 200 OK | Indicates a successful response. |\n| 400 Bad Request | Indicates that the parameters provided are invalid. |\n\nExample response:\n\n```\n{\n    \"status\": \"OK\",\n    \"num_results\": 17,\n    \"page\": 1,\n    \"total_pages\": 4,\n    \"results\": [\n        {\n            \"title\": \"Crush It!: Why NOW Is the Time to Cash In on Your Passion\",\n            \"category\": [\n                \"non-fiction\"\n            ],\n            \"type\": \"audio\",\n            \"author\": \"Gary Vaynerchuk\",\n            \"release_year\": 2010,\n            \"rating\": \"7\"\n        },\n        ...\n    ]\n]\n\n ```\n\n## API Authentication\n\nSome endpoints require authentication.\n\nThe endpoints that require authentication expect the API key to be provided as a query parameter named `api-key`."
+		},
+		{
+			"name": "Trello",
+			"item": [
+				{
+					"name": "Check API is up and running",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();\r",
+									"console.log('Test 1: Check API status 200')\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"console.log('Test compleated')"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}boards/{{DavidTzemachBoard}}/cards?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}boards"
+							],
+							"path": [
+								"{{DavidTzemachBoard}}",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A new Board",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name=David Tzemach&key=25d123b97a80e56737c2d91c4588aeaf&token=ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "David Tzemach"
+								},
+								{
+									"key": "key",
+									"value": "25d123b97a80e56737c2d91c4588aeaf"
+								},
+								{
+									"key": "token",
+									"value": "ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A board by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}/boards/65356aadd9c39ac7ec64d16a?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}"
+							],
+							"path": [
+								"boards",
+								"65356aadd9c39ac7ec64d16a"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lists on Get Cards on a Boardspecific board Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}boards/{{DavidTzemachBoard}}/cards?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}boards"
+							],
+							"path": [
+								"{{DavidTzemachBoard}}",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TrelloURL}}boards/{{DavidTzemachBoard}}/lists?name=Done is done&key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}boards"
+							],
+							"path": [
+								"{{DavidTzemachBoard}}",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Done is done"
+								},
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Card in a list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}cards?idList=65356aadd9c39ac7ec64d171&key={{TrelloAPIKey}}&token={{TrelloTokenApi}}&name=Move Card Task",
+							"host": [
+								"{{TrelloURL}}cards"
+							],
+							"query": [
+								{
+									"key": "idList",
+									"value": "65356aadd9c39ac7ec64d171"
+								},
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								},
+								{
+									"key": "name",
+									"value": "Move Card Task"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move card between lists",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/cards/65363b6204004af5082fab1b?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}&idList=65357f3c5207efb353897599",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"cards",
+								"65363b6204004af5082fab1b"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								},
+								{
+									"key": "idList",
+									"value": "65357f3c5207efb353897599"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lists on a specific board",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/cards/65363b6204004af5082fab1b?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"cards",
+								"65363b6204004af5082fab1b"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Trello API"
+		},
+		{
+			"name": "Grocery Store",
+			"item": [
+				{
+					"name": "[Test 1] - Validate endpoint status 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Lets store it in a variable\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"if(pm.environment.name=== 'Testing Env')\r",
+									"{\r",
+									"    pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Creating a test with assertion ('Equl')\r",
+									"pm.test(\"Server status_1 = UP\", function () {\r",
+									"    pm.expect(response.status).to.eql(\"UP\");\r",
+									"});\r",
+									"\r",
+									"//Creating a test with assertion ('Contains ')\r",
+									"pm.test(\"Server status_2 =  UP\", function () {\r",
+									"    pm.expect(response.status).contains(\"UP\");\r",
+									"});\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://simple-grocery-store-api.glitch.me/status",
+							"protocol": "https",
+							"host": [
+								"simple-grocery-store-api",
+								"glitch",
+								"me"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Test 2] - Navigate through complex response_1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Get Server response\r",
+									"const serverResponse = pm.response.json();\r",
+									"//Validate specific data before writing the test\r",
+									"console.log(serverResponse.Response.Data[0].Results[1].Address.Active)\r",
+									"\r",
+									"//Create a specific variable to store the information\r",
+									"const validateResponse = serverResponse.Response.Data[0].Results[1].Address.Active\r",
+									"\r",
+									"//Validate a specific value in the response inside an array \r",
+									"pm.test(\"Validate object Active status in an array\", function () {\r",
+									"    pm.expect(validateResponse).eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://run.mocky.io/v3/8a0271df-d5c7-4081-a12f-c7bba2e3f781",
+							"protocol": "https",
+							"host": [
+								"run",
+								"mocky",
+								"io"
+							],
+							"path": [
+								"v3",
+								"8a0271df-d5c7-4081-a12f-c7bba2e3f781"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Test 3] - Navigate through complex response_2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Get Server response\r",
+									"const serverResponse = pm.response.json();\r",
+									"\r",
+									"//Validate specific data before writing the test\r",
+									"console.log(serverResponse.Item01.Data.Results[0].Contact.Address.PostalCode)\r",
+									"\r",
+									"function getFirstPostalCode() {\r",
+									"    const firstPostalCode = serverResponse.Item01.Data.Results[0].Contact.Address.PostalCode;\r",
+									"    return firstPostalCode;\r",
+									"}\r",
+									"\r",
+									"//Test\r",
+									"//Validate a specific value in the response inside an array \r",
+									"pm.test(\"Validate postal code\", function () {\r",
+									"    pm.expect(getFirstPostalCode()).eq('12345');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://run.mocky.io/v3/d390ec44-3a7f-4977-9d3a-86f0cc524e71",
+							"protocol": "https",
+							"host": [
+								"run",
+								"mocky",
+								"io"
+							],
+							"path": [
+								"v3",
+								"d390ec44-3a7f-4977-9d3a-86f0cc524e71"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Testing the API error handling (Negative Testing)",
+			"item": [
+				{
+					"name": "Check error of a missing cartID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const severRespons = pm.response.json();\r",
+									"console.log(severRespons.error)\r",
+									"\r",
+									"pm.test(\"Error message\", function () {\r",
+									"    pm.expect(severRespons.error).to.eql(\"Invalid or missing cartId.\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\": \"EB_CXNNp1AamJdCbdopS2\",\r\n    \"customerName\": \"{{$randomUserName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/orders",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid product category",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();\r",
+									"console.log(\"Test staus is UP and Status code is 200\")"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const severRespons = pm.response.json();\r",
+									"console.log(severRespons.error)\r",
+									"\r",
+									"pm.test(\"Error message with contains\", function () {\r",
+									"    pm.expect(severRespons.error).to.contain(\"Invalid value for query\");\r",
+									"})\r",
+									"\r",
+									"//same test with different assertions \r",
+									"pm.test(\"Error message with .have\", function () {\r",
+									"    pm.expect(severRespons.error).to.have.string(\"Invalid value for query\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/?category=BLA",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "BLA"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Moving data from one request to other",
+			"item": [
+				{
+					"name": "[Example 1] : Step 1 - Get all products",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//JS object\r",
+									"const serverRespons = pm.response.json()\r",
+									"console.log(serverRespons[0].id)\r",
+									"\r",
+									"//Now lets create a dynamic variable we will use in next requests\r",
+									"pm.collectionVariables.set('productId',serverRespons[0].id)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 1] : Step 2 - Get a specific Product using dynamic variable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.clear()\r",
+									"\r",
+									"const serverResponse = pm.response.json();\r",
+									"console.log(serverResponse.id)\r",
+									"\r",
+									"//Validation 1 - Test the response, without it there is no need to continue \r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validation 2 - Validate that the server response is a valid JSON object\r",
+									"pm.test('Validate JSON object/array was received', function(){\r",
+									"    pm.expect([serverResponse]).to.be.an('array');\r",
+									"    //or\r",
+									"    //pm.expect(serverResponse[0]).to.be.an('object');\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate Item ID = 4643\", function () {\r",
+									"    pm.expect(serverResponse.id).to.eql(4643);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate category = coffee\", function () {\r",
+									"    pm.expect(serverResponse.category).contain('coffee');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate price is lower than 50\", function () {\r",
+									"    pm.expect(serverResponse.price).lessThan(50)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate item in stock\", function () {\r",
+									"    pm.expect(serverResponse.inStock).eq(true)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/:productid",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 1 - Create a Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//JS object\r",
+									"const serverRespons = pm.response.json()\r",
+									"console.log(serverRespons.cartId)\r",
+									"\r",
+									"pm.test(\"Check response is an object/Array\" , () => {\r",
+									"    pm.expect(serverRespons).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check response have a CartID proporty\" , () => {\r",
+									"    pm.expect(serverRespons).haveOwnProperty('cartId')\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check cart id proporty is a sting\" , () => {\r",
+									"    pm.expect(serverRespons.cartId).to.be.a('string') \r",
+									"})\r",
+									"\r",
+									"\r",
+									"//Now lets create a dynamic variable we will use in next requests\r",
+									"pm.collectionVariables.set('_CartID',serverRespons.cartId)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 2 - Get a specific cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								""
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{_CartID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 3 - Add items to cart using JSON",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//JS object\r",
+									"const serverRespons = pm.response.json()\r",
+									"console.log(serverRespons.itemId)\r",
+									"\r",
+									"//Ensure that if the response body does not contain an itemId, a test will fail\r",
+									"\r",
+									"//Test_1: Validate Item was created\r",
+									"pm.test(\"property named created from the response object has the value true\" , () => {\r",
+									"    pm.expect(serverRespons.created).to.be.eql(true)\r",
+									"})\r",
+									"\r",
+									"//Test_2: Validate Item type\r",
+									"pm.test(\"itemId from the response object is a number\" , () => {\r",
+									"    pm.expect(serverRespons.itemId).is.a('number')\r",
+									"})\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.collectionVariables.set('_itemId',serverRespons.itemId)\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": [\r\n        \"2585\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items"
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{_CartID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 4 - Get Cart items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "EB_CXNNp1AamJdCbdopS2",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{_CartID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 5 - Update Product Quantity Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": \"9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items/:itemId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{_CartID}}"
+								},
+								{
+									"key": "itemId",
+									"value": "{{_itemId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 6 - Delete item in cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items/:itemId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"carts",
+								":cartId",
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "cartId",
+									"value": "{{_CartID}}"
+								},
+								{
+									"key": "itemId",
+									"value": "{{_itemId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 7 - Create an Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//JS object\r",
+									"const serverRespons = pm.response.json()\r",
+									"\r",
+									"pm.test(\"property named created from the response object has the value true\" , () => {pm.expect(serverRespons.created).to.be.eql(true)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check orderid property is a sting\" , () => { pm.expect(serverRespons.orderId).to.be.a('string')})\r",
+									"\r",
+									"//Store order ID \r",
+									"pm.collectionVariables.set('orderId', serverRespons.orderId)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\": \"{{_CartID}}\",\r\n    \"customerName\": \"{{$randomUserName}}\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/orders?cartID={{_CartID}}",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "cartID",
+									"value": "{{_CartID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Example 2] : Step 8 - Update an order name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"customerName\": \"David Tzemach\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/orders/:orderId",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"orders",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "{{_"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Using SET and GET variable",
+			"item": [
+				{
+					"name": "EX1 - Basic Set/Get with two requests",
+					"item": [
+						{
+							"name": "Get all products - Store a specific caegory",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"console.clear();\r",
+											"console.log(\"Test staus is UP and Status code is 200\")"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const serverResponse = pm.response.json()\r",
+											"console.log(serverResponse[0].id)\r",
+											"\r",
+											"//Using set to store a unique ITEM id 4643\r",
+											"pm.collectionVariables.set('_CoffeeCategoryID', serverResponse[0].id)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL - Grocery-Store}}/products/",
+									"host": [
+										"{{BaseURL - Grocery-Store}}"
+									],
+									"path": [
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a product by using category",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const serverResponse = pm.response.json()\r",
+											"\r",
+											"//Get the variable we stored in the previous request \r",
+											"\r",
+											"const CoffeCategoryID = pm.collectionVariables.get('_CoffeeCategoryID')\r",
+											"console.log(CoffeCategoryID)\r",
+											"console.log(\"Variable Value is:\"  + serverResponse[0].id)\r",
+											"\r",
+											"//Validate if the category ID we receive is the same as we expect \r",
+											"\r",
+											"pm.test('Correct product was retrived', () => {\r",
+											"    pm.expect( serverResponse[0].id).to.eql(CoffeCategoryID)\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL - Grocery-Store}}/products/?category=coffee",
+									"host": [
+										"{{BaseURL - Grocery-Store}}"
+									],
+									"path": [
+										"products",
+										""
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "coffee"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EX2  - Using variables of a pre-request script",
+					"item": [
+						{
+							"name": "Update Product Quantity Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//store a dynamic variable\r",
+											"pm.collectionVariables.set('RandomQuantity',rndNumber(14))\r",
+											"\r",
+											"\r",
+											"//create the function that will generate the random number\r",
+											"function rndNumber(maxNumber) {\r",
+											"    return Math.floor(Math.random() * maxNumber);\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"quantity\": \"{{RandomQuantity}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL - Grocery-Store}}/carts/:cartId/items/:itemId",
+									"host": [
+										"{{BaseURL - Grocery-Store}}"
+									],
+									"path": [
+										"carts",
+										":cartId",
+										"items",
+										":itemId"
+									],
+									"variable": [
+										{
+											"key": "cartId",
+											"value": "{{cartId}}"
+										},
+										{
+											"key": "itemId",
+											"value": "{{_itemId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Searching for data in a body response using FOR and IF",
+			"item": [
+				{
+					"name": "Get all products",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.clear();\r",
+									"console.log(\"Test staus is UP and Status code is 200\")"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const serverResponse = pm.response.json()\r",
+									"const uniqeCat = pm.collectionVariables.get('_CoffeeCategoryID')\r",
+									"let isOrderIDResponse = false\r",
+									"\r",
+									"pm.test('Assert data in array', ()=>  {\r",
+									"    for (let i = 0; i < serverResponse.length; i++) {\r",
+									"    if (serverResponse[i].id == uniqeCat)\r",
+									"    isOrderIDResponse = true\r",
+									"}\r",
+									"    pm.expect(isOrderIDResponse).to.be.true;\r",
+									"})\r",
+									"\r",
+									"   "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL - Grocery-Store}}/products/",
+							"host": [
+								"{{BaseURL - Grocery-Store}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Advanced Assertions",
+			"item": [
+				{
+					"name": "Get All boards with multiple assertions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Get JSON request \r",
+									"const serverResponse = pm.response.json()\r",
+									"\r",
+									"//Lets save the two boards as collection variables \r",
+									"pm.collectionVariables.set('Board 1', serverResponse[0].id)\r",
+									"pm.collectionVariables.set('Board 2', serverResponse[1].id)\r",
+									"\r",
+									"\r",
+									"//Tests we should create for ensuring board is created as expecte\r",
+									"console.log(serverResponse[0].prefs.permissionLevel)\r",
+									"\r",
+									"pm.test(\"Check that we got boards name\" , () => {\r",
+									"    pm.expect(serverResponse[0].name).is.eql('Board 1')})\r",
+									"\r",
+									"pm.test(\"Check that proporty closed is set to close\" , () => {\r",
+									"    pm.expect(serverResponse[0].closed).to.be.eq(false)\r",
+									"    })\r",
+									"\r",
+									"pm.test(\"Check permission level set on private\" , () => {\r",
+									"    pm.expect(serverResponse[0].prefs.permissionLevel).to.be.eql('private')\r",
+									"    \r",
+									"    })\r",
+									"\r",
+									"pm.test('Check calander view is set to false', ()=> {\r",
+									"    pm.expect(serverResponse[0].prefs.switcherViews[2].enabled).to.be.eq(false)\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TrelloURL}}members/me/boards?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}&filter=open",
+							"host": [
+								"{{TrelloURL}}members"
+							],
+							"path": [
+								"me",
+								"boards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								},
+								{
+									"key": "filter",
+									"value": "open"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A new Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const serverResponse = pm.response.json()\r",
+									"console.log(serverResponse.name)\r",
+									"\r",
+									"//Lets save the two boards as collection variables \r",
+									"pm.collectionVariables.set('Daynamic Board', serverResponse.id)\r",
+									"\r",
+									"pm.test(\"Check that we got boards name\" , () => {\r",
+									"    pm.expect(serverResponse.name).is.eql('Postman Board ' + pm.collectionVariables.get('_boardNumber')\r",
+									"    )})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//Set a collection variable we will use to create unique board names\r",
+									"let boardNumber = pm.collectionVariables.get('_boardNumber')\r",
+									"if(isNaN(boardNumber)){\r",
+									"    boardNumber = 0   }\r",
+									"    else boardNumber++   \r",
+									"\r",
+									"pm.collectionVariables.set('_boardNumber', boardNumber)\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name=Postman Board {{_boardNumber}}&key=25d123b97a80e56737c2d91c4588aeaf&token=ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Postman Board {{_boardNumber}}"
+								},
+								{
+									"key": "key",
+									"value": "25d123b97a80e56737c2d91c4588aeaf"
+								},
+								{
+									"key": "token",
+									"value": "ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A board by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}/boards/:{id}}?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}"
+							],
+							"path": [
+								"boards",
+								":{id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "{id}}",
+									"value": "{{Daynamic Board}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new list TODO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Get JSON request \r",
+									"const serverResponse = pm.response.json()\r",
+									"\r",
+									"pm.collectionVariables.set('_ListID',serverResponse.id)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TrelloURL}}boards/:id/lists?name=Start Doing &key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}boards"
+							],
+							"path": [
+								":id",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Start Doing "
+								},
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{Daynamic Board}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Card in a list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}cards?idList={{_ListID}}&key={{TrelloAPIKey}}&token={{TrelloTokenApi}}&name=Move Card Task",
+							"host": [
+								"{{TrelloURL}}cards"
+							],
+							"query": [
+								{
+									"key": "idList",
+									"value": "{{_ListID}}"
+								},
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								},
+								{
+									"key": "name",
+									"value": "Move Card Task"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move card between lists Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.trello.com/1/cards/65363b6204004af5082fab1b?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}&idList=65357f3c5207efb353897599",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"cards",
+								"65363b6204004af5082fab1b"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								},
+								{
+									"key": "idList",
+									"value": "65357f3c5207efb353897599"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Board",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//Get the all boards variable \r",
+									"const existingBoardsids = pm.collectionVariables.get('AllBoards')\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{TrelloURL}}boards/:{id}}?key={{TrelloAPIKey}}&token={{TrelloTokenApi}}",
+							"host": [
+								"{{TrelloURL}}boards"
+							],
+							"path": [
+								":{id}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{TrelloAPIKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{TrelloTokenApi}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "{id}}",
+									"value": "{{Daynamic Board}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200 - Folder level\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Advanced Assertions using BDD/Chai",
+			"item": [
+				{
+					"name": "Assertions on Array",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let serverResponse = pm.response.json()\r",
+									"console.log(serverResponse.filters[2].isAllowed)\r",
+									"\r",
+									"let customerId = serverResponse.filters[2].id\r",
+									"let customerName = serverResponse.filters[2].name\r",
+									"let isAllowed = serverResponse.filters[2].isAllowed\r",
+									"\r",
+									"pm.test('Check customer values', function () {\r",
+									"    pm.expect(customerId).is.eql(103)\r",
+									"    pm.expect(customerName).is.eql('MANUFACTURER')\r",
+									"    pm.expect(isAllowed).to.be.false\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://run.mocky.io/v3/a72d58ad-114a-4a24-9e9c-c6c964ad87ce",
+							"protocol": "https",
+							"host": [
+								"run",
+								"mocky",
+								"io"
+							],
+							"path": [
+								"v3",
+								"a72d58ad-114a-4a24-9e9c-c6c964ad87ce"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workflow Scenario",
+			"item": [
+				{
+					"name": "F",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var companies = pm.environment.get(\"companies\")\r",
+									"if(!companies){\r",
+									"    companies = [\"David\", \"May\", \"Gili\"]\r",
+									"}\r",
+									"\r",
+									"// The shift() method removes the element at the zeroth index and shifts the values at consecutive indexes down, then returns the removed value\r",
+									"var currentcompany = companies.shift()\r",
+									"pm.environment.set(\"company\", currentcompany)\r",
+									"pm.environment.set(\"companies\", companies)\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var companies = pm.environment.get(\"companies\")\r",
+									"if(companies && companies.length > 0 ){\r",
+									"postman.setNextRequest(\"F\")\r",
+									"} else{\r",
+									"    postman.setNextRequest(null)\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{company}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?key=25d123b97a80e56737c2d91c4588aeaf&token=ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "David Tzemach",
+									"disabled": true
+								},
+								{
+									"key": "key",
+									"value": "25d123b97a80e56737c2d91c4588aeaf"
+								},
+								{
+									"key": "token",
+									"value": "ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API BaseURL ",
+			"value": "http://simple-grocery-store-api.online/"
+		},
+		{
+			"key": "TrelloAPIKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "TrelloTokenApi",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "TrelloURL",
+			"value": "https://api.trello.com/1/"
+		},
+		{
+			"key": "DavidTzemachBoard",
+			"value": "Davif Tzemach",
+			"type": "string"
+		},
+		{
+			"key": "BaseURL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "6a18ad4690afacdb92f3539a38136d53abbc51350078bf072fbeb88687c45572"
+		},
+		{
+			"key": "BaseURL - Grocery-Store",
+			"value": "https://simple-grocery-store-api.glitch.me"
+		},
+		{
+			"key": "firstName",
+			"value": ""
+		},
+		{
+			"key": "productId",
+			"value": ""
+		},
+		{
+			"key": "cartId",
+			"value": ""
+		},
+		{
+			"key": "_CartID",
+			"value": ""
+		},
+		{
+			"key": "_itemId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		},
+		{
+			"key": "_CoffeeCategoryID",
+			"value": ""
+		},
+		{
+			"key": "RandomQuantity",
+			"value": ""
+		},
+		{
+			"key": "Board 1",
+			"value": ""
+		},
+		{
+			"key": "Board 2",
+			"value": ""
+		},
+		{
+			"key": "Daynamic Board",
+			"value": ""
+		},
+		{
+			"key": "_ListID",
+			"value": ""
+		},
+		{
+			"key": "AllBoards",
+			"value": ""
+		},
+		{
+			"key": "boardNumber",
+			"value": ""
+		},
+		{
+			"key": "_boardNumber",
+			"value": ""
+		}
+	]
+}
