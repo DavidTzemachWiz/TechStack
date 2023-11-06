@@ -156,6 +156,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "https://api.trello.com/1/boards/?name=David Tzemach&key=25d123b97a80e56737c2d91c4588aeaf&token=ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8",
 							"protocol": "https",
@@ -1948,6 +1957,114 @@
 								{
 									"key": "token",
 									"value": "ATTAbe893830c374e3bbd7473e208c8c1d516bf52fc66ac865a1437f2d9ed55a945f228C5EB8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reuse of tests",
+			"item": [
+				{
+					"name": "Get Book List with API Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Create a variable with function that run all tests for this request\r",
+									"var commonTests = () =>{\r",
+									" pm.test(\"Value Checking_1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Value Checking_2\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.num_results).to.eql(17);\r",
+									"});\r",
+									"}\r",
+									"\r",
+									"//Calling the request (Withut callin it the tests will not run)\r",
+									"pm.environment.set(\"commonTests\",commonTests.toString())\r",
+									"\r",
+									"commonTests()\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://valentines-book-list.glitch.me/books/lists?api-key=8fhg93xkjd38fhg834jdfgjd&list=non-fiction",
+							"protocol": "https",
+							"host": [
+								"valentines-book-list",
+								"glitch",
+								"me"
+							],
+							"path": [
+								"books",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "api-key",
+									"value": "8fhg93xkjd38fhg834jdfgjd"
+								},
+								{
+									"key": "list",
+									"value": "non-fiction"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book List with API Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(pm.environment.get(\"commonTests\"))();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://valentines-book-list.glitch.me/books/lists?api-key=8fhg93xkjd38fhg834jdfgjd&list=non-fiction",
+							"protocol": "https",
+							"host": [
+								"valentines-book-list",
+								"glitch",
+								"me"
+							],
+							"path": [
+								"books",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "api-key",
+									"value": "8fhg93xkjd38fhg834jdfgjd"
+								},
+								{
+									"key": "list",
+									"value": "non-fiction"
 								}
 							]
 						}
