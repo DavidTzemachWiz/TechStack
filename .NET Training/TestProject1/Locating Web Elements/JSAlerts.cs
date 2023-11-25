@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V117.HeadlessExperimental;
 using OpenQA.Selenium.DevTools.V117.Runtime;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using WebDriverManager.Clients;
@@ -25,8 +26,7 @@ namespace TestProject1.Locating_Web_Elements
             //TestContext.Progress.WriteLine("Open New browser for tests");
             new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://rahulshettyacademy.com/AutomationPractice/");
-            driver.Manage().Window.Maximize();
+
 
             //Implicit wait of 5 seconds for all elements 
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
@@ -35,10 +35,11 @@ namespace TestProject1.Locating_Web_Elements
         [Test]
         public void TestAlert()
         {
+            driver.Url = "https://rahulshettyacademy.com/AutomationPractice/";
+            driver.Manage().Window.Maximize();
+
             //Basic Alert Buttonn
             //driver.FindElement(By.Id("alertbtn")).Click();
-
-       
 
             //Add text  
             driver.FindElement(By.Name("enter-name")).SendKeys("David Tzemach");
@@ -54,6 +55,20 @@ namespace TestProject1.Locating_Web_Elements
             //More commands 
             //driver.SwitchTo().Alert().SendKeys("");
             // driver.SwitchTo().Alert().Dismiss();
+        }
+
+        [Test]
+        public void test_actions()
+        {
+            //Change URL for this tests
+            driver.Url = "https://rahulshettyacademy.com/";
+
+            //Actions 
+            Actions a = new Actions(driver);
+            a.MoveToElement(driver.FindElement(By.CssSelector("a.dropdown-toggle"))).Perform();
+            a.MoveToElement(driver.FindElement(By.XPath("//ul[@class='dropdown-menu']/li[1]/a"))).Click().Perform();
+            Thread.Sleep(3000);
+
         }
 
         [TearDown]  

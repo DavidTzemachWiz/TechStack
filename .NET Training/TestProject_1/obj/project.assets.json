@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Dropbox\\PC (2)\\Documents\\GitHub\\TechStack\\.NET Training\\TestProject_1\\TestProject_1.csproj",
-      "projectName": "TestProject_1",
-      "projectPath": "C:\\Users\\User\\Dropbox\\PC (2)\\Documents\\GitHub\\TechStack\\.NET Training\\TestProject_1\\TestProject_1.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Dropbox\\PC (2)\\Documents\\GitHub\\TechStack\\.NET Training\\TestProject_1\\SeleniumTraining2024.NET.csproj",
+      "projectName": "SeleniumTraining2024.NET",
+      "projectPath": "C:\\Users\\User\\Dropbox\\PC (2)\\Documents\\GitHub\\TechStack\\.NET Training\\TestProject_1\\SeleniumTraining2024.NET.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\User\\Dropbox\\PC (2)\\Documents\\GitHub\\TechStack\\.NET Training\\TestProject_1\\obj\\",
       "projectStyle": "PackageReference",
