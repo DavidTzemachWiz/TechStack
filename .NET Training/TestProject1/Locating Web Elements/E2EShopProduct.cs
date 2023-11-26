@@ -71,7 +71,44 @@ namespace TestProject1.Locating_Web_Elements
 
             //Click on Checkout button 
             driver.FindElement(By.CssSelector(".nav-link.btn.btn-primary")).Click();
-        }
-    }         
-    }
 
+
+            //Validatet that the correct products are in cart
+            IList<IWebElement> productsInCart = driver.FindElements(By.CssSelector("h4 a"));
+
+            bool verification = false;
+            foreach (var item in productsInCart)
+            {
+                if (item.Text == "iphone X" || item.Text == "Blackberry")
+                {
+                    TestContext.Progress.WriteLine(item.Text);
+                    verification = true;
+                }
+                else { verification = false; }
+            }
+            if (verification == true)
+            {
+                Assert.IsTrue(true, "All products in cart");
+            }
+            else { Assert.Fail("Test Failed"); }
+
+            //Click on Checkout button  
+            driver.FindElement(By.CssSelector("button[class='btn btn-success']")).Click();
+
+            //Add Text -> Select from Drop-Down
+            driver.FindElement(By.CssSelector("#country")).SendKeys("Ind");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("India")));
+            driver.FindElement(By.LinkText("India")).Click();
+
+            //approve checkout box
+            driver.FindElement(By.CssSelector(".checkbox.checkbox-primary")).Click();
+
+            //Click on purches
+            driver.FindElement(By.CssSelector("input[value='Purchase']")).Click();
+
+            //Approve 
+            string StringData = driver.FindElement(By.CssSelector(".alert.alert-success.alert-dismissible")).Text;
+            StringAssert.Contains("Success", StringData);
+        }
+    }
+}
