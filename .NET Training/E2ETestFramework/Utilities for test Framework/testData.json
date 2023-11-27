@@ -1,0 +1,13 @@
+﻿{
+  //Store valid Credentials 
+  "username": "rahulshettyacademy",
+  "password": "learning",
+
+  //Store wrong  Credentials 
+  "username_wrong": "rahu",
+  "password_wrong": "wrong",
+
+  //Store Array of products 
+  "Products": [ "iphone X", "Blackberry" ]
+
+}

@@ -114,3 +114,7 @@ C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFra
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\obj\Debug\net6.0\E2ETestFramework.pdb
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\obj\Debug\net6.0\E2ETestFramework.genruntimeconfig.cache
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\obj\Debug\net6.0\ref\E2ETestFramework.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\bin\Debug\net6.0\E2ETestFramework.dll.config
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\E2ETestFramework\bin\Debug\net6.0\SeleniumExtras.PageObjects.dll

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E2ETestFramework.Utilities_for_test_Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V117.HeadlessExperimental;
@@ -14,22 +15,9 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace TestProject1.Locating_Web_Elements
 {
-    internal class E2EShopProduct
+    internal class E2EShopProduct_F : BaseClass
     {
-        IWebDriver driver;
-
-        [SetUp]
-        public void openChromeBrowser()
-        {
-            //TestContext.Progress.WriteLine("Open New browser for tests");
-            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://rahulshettyacademy.com/loginpagePractise/");
-            driver.Manage().Window.Maximize();
-
-            //Implicit wait of 5 seconds for all elements 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
-        }
+        //Driver is now inherited from the BaseClass becouse its not available in current class   
 
         [Test]
         public void FillAllInformation()
