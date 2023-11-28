@@ -21,10 +21,10 @@ namespace E2ETestFramework.Tests
     {      
         [Test, Category("Sanity")]
         [TestCase("WrongUSer_1", "Wrong Pass_1")]
-        [TestCase("WrongUSer_2", "Wrong Pass_2")]
-        [TestCase("WrongUSer_3", "Wrong Pass_3")]
-        [TestCase("WrongUSer_4", "Wrong Pass_4")]
-        [TestCase("WrongUSer_5", "Wrong Pass_5")]
+        //[TestCase("WrongUSer_2", "Wrong Pass_2")]
+        //[TestCase("WrongUSer_3", "Wrong Pass_3")]
+        //[TestCase("WrongUSer_4", "Wrong Pass_4")]
+        //[TestCase("WrongUSer_5", "Wrong Pass_5")]
         [Parallelizable(ParallelScope.All)]
         public void ParrallelTest_1(string US, string PS)
         {

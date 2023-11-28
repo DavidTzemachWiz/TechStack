@@ -15,7 +15,9 @@ using System.Threading;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using NUnit.Framework.Interfaces;
+using AventStack.ExtentReports.Model;
 using OpenQA.Selenium.DevTools.V117.Page;
+using System.CodeDom;
 
 namespace E2ETestFramework.Utilities_for_test_Framework
 {
@@ -94,7 +96,6 @@ namespace E2ETestFramework.Utilities_for_test_Framework
             //Publish test results
             var status = TestContext.CurrentContext.Result.Outcome.Status;
             var stackTrace = TestContext.CurrentContext.Result.StackTrace ;
-
 
             DateTime time = DateTime.Now;
             string fileName = "ScreenShot-" + time.ToString("h_mm_ss") + ".png";
