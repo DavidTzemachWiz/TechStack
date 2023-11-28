@@ -13,15 +13,25 @@ using AngleSharp;
 using System.Configuration;
 using System.Threading;
 
+
 namespace E2ETestFramework.Utilities_for_test_Framework
 {
     public class BaseClass
     {
         string browsername;
+
+        //Configure reports
+        [OneTimeSetUp]//will run only once for all test 
+        public void Setup()
+        {
+            string workingDirecory = Environment.CurrentDirectory;
+            string projctDirectory = Directory.GetParent(workingDirecory).Parent.Parent.FullName;
+            var htmreporter = new ExtentHtmlReporter();
+        }
      
        public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
 
-        [SetUp]
+        [SetUp]// Will run prior each test 
         public void StartBrowser()
         {
             //Global Configuration managmant 
