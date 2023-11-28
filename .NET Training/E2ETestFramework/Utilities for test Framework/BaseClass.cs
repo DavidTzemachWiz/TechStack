@@ -26,8 +26,8 @@ namespace E2ETestFramework.Utilities_for_test_Framework
 
         //Configure reports
 
-        ExtentReports extent;
-        ExtentTest test; 
+        public ExtentReports extent;
+        public ExtentTest test; 
         [OneTimeSetUp]//will run only once for all test 
         public void Setup()
         {
@@ -35,6 +35,7 @@ namespace E2ETestFramework.Utilities_for_test_Framework
             string projctDirectory = Directory.GetParent(workingDirecory).Parent.Parent.FullName;
             string reportPath = projctDirectory + "//index.html";
             var htmReporter = new ExtentHtmlReporter(reportPath);
+            extent = new ExtentReports();
             extent.AttachReporter(htmReporter);
             extent.AddSystemInfo("Env", "QA");
             extent.AddSystemInfo("Env", "Dev");
@@ -106,7 +107,7 @@ namespace E2ETestFramework.Utilities_for_test_Framework
             {
 
             }
-
+            extent.Flush();
             driver.Value.Quit();
         }
 
