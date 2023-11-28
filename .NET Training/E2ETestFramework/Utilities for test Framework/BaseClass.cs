@@ -15,6 +15,7 @@ using System.Threading;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using NUnit.Framework.Interfaces;
+using OpenQA.Selenium.DevTools.V117.Page;
 
 namespace E2ETestFramework.Utilities_for_test_Framework
 {
@@ -26,6 +27,7 @@ namespace E2ETestFramework.Utilities_for_test_Framework
         //Configure reports
 
         ExtentReports extent;
+        ExtentTest test; 
         [OneTimeSetUp]//will run only once for all test 
         public void Setup()
         {
@@ -44,7 +46,7 @@ namespace E2ETestFramework.Utilities_for_test_Framework
         public void StartBrowser()
         {
             //Create report
-            extent.CreateTest(TestContext.CurrentContext.Test.Name);
+            test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
 
             //Global Configuration managmant 
             //First we check if it got the value from the terminal, if YEs it will use it
@@ -90,9 +92,15 @@ namespace E2ETestFramework.Utilities_for_test_Framework
         {
             //Publish test results
             var status = TestContext.CurrentContext.Result.Outcome.Status;
+            var stackTrace = TestContext.CurrentContext.Result.StackTrace ;
+
+
+            DateTime time = DateTime.Now;
+            string fileName = "ScreenShot-" + time.ToString("h_mm_ss") + ".png";
             if (status == TestStatus.Failed)
             {
-
+                test.Fail("Test Fail", CaptureScreenshot(driver.Value,fileName));
+                test.Log(Status.Fail, "Test Fail with log trace" + stackTrace);
             }
             else if (status == TestStatus.Passed)
             {
@@ -100,6 +108,13 @@ namespace E2ETestFramework.Utilities_for_test_Framework
             }
 
             driver.Value.Quit();
+        }
+
+        public MediaEntityModelProvider CaptureScreenshot(IWebDriver driver, string screenShotName)
+        {
+            ITakesScreenshot ts=(ITakesScreenshot)driver;
+            var screenshot = ts.GetScreenshot().AsBase64EncodedString;
+            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
         }
     }
 }
