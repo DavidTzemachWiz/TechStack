@@ -16,8 +16,8 @@ namespace TestProject1
         [Test]
         public void RadioButton_test()
         {
-            driver.Url = "https://rahulshettyacademy.com/loginpagePractise/";
-            IList <IWebElement> rdos = driver.FindElements(By.CssSelector("input[type='radio']"));//Css selector created manually 
+            driver.Value.Url = "https://rahulshettyacademy.com/loginpagePractise/";
+            IList <IWebElement> rdos = driver.Value.FindElements(By.CssSelector("input[type='radio']"));//Css selector created manually 
             TestContext.Progress.WriteLine("Item in list [0] " + rdos[0].GetAttribute("value") + "IsSelcted?: " + rdos[0].Selected);//Admin
             TestContext.Progress.WriteLine("Item in list [1] " + rdos[1].GetAttribute("value") + "IsSelcted?: " + rdos[1].Selected);//User
 
@@ -36,7 +36,7 @@ namespace TestProject1
             [TearDown]
         public void CloseBrowser()
         {
-            driver.Close();
+            driver.Value.Close();
         }
 
     }

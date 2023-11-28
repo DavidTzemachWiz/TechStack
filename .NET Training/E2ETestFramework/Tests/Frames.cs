@@ -22,24 +22,24 @@ namespace TestProject1.Locating_Web_Elements
         [Test]
         public void TestFrame()
         {
-            driver.Url = "https://rahulshettyacademy.com/AutomationPractice/";
+            driver.Value.Url = "https://rahulshettyacademy.com/AutomationPractice/";
             //Get the Iframe element
-            IWebElement iframe = driver.FindElement(By.Id("courses-iframe"));
+            IWebElement iframe = driver.Value.FindElement(By.Id("courses-iframe"));
 
             //Scroll down to iframe 
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].scrollIntoView(true);",iframe);
             
             //Switch to the frame
-            driver.SwitchTo().Frame("courses-iframe");
+            driver.Value.SwitchTo().Frame("courses-iframe");
 
             Thread.Sleep(3000);
             //Now we can click the button
-            driver.FindElement(By.ClassName("new-navbar-highlighter")).Click();
+            driver.Value.FindElement(By.ClassName("new-navbar-highlighter")).Click();
 
             //If we want to set the driver to the main page we will use: 
-            driver.SwitchTo().DefaultContent();
-            driver.FindElement(By.ClassName("h1")).Click();
+            driver.Value.SwitchTo().DefaultContent();
+            driver.Value.FindElement(By.ClassName("h1")).Click();
 
         }
 

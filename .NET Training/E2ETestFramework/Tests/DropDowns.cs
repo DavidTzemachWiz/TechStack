@@ -18,7 +18,7 @@ namespace TestProject1
         public void DropDown()
         {
             //Select the Drop-Down Values 
-            IWebElement dropdown = driver.FindElement(By.CssSelector("select.form-control"));
+            IWebElement dropdown = driver.Value.FindElement(By.CssSelector("select.form-control"));
             SelectElement choicse = new SelectElement(dropdown);
 
             //Validate that drop does not allow MultySelction 
@@ -45,7 +45,7 @@ namespace TestProject1
             [TearDown]
         public void CloseBrowser()
         {
-            driver.Close();
+            driver.Value.Close();
         }
 
     }

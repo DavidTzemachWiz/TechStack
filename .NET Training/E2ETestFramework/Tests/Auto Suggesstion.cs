@@ -22,16 +22,16 @@ namespace TestProject1.Locating_Web_Elements
         [Test]
         public void TestAlert()
         {
-            driver.Url = "https://rahulshettyacademy.com/AutomationPractice/";
+            driver.Value.Url = "https://rahulshettyacademy.com/AutomationPractice/";
             // Find the input element
-            IWebElement inputElement = driver.FindElement(By.Id("autocomplete"));
+            IWebElement inputElement = driver.Value.FindElement(By.Id("autocomplete"));
             inputElement.SendKeys("ind");
 
             Thread.Sleep(4000);
 
             //Select an option from the list 
             
-            IList<IWebElement> options = driver.FindElements(By.CssSelector(".ui-menu-item div"));
+            IList<IWebElement> options = driver.Value.FindElements(By.CssSelector(".ui-menu-item div"));
             TestContext.Progress.WriteLine(inputElement.GetAttribute("value"));
 
             foreach (IWebElement item in options)
@@ -46,7 +46,7 @@ namespace TestProject1.Locating_Web_Elements
         [TearDown]
         public void closeBrowser()
         {
-            driver.Close();
+            driver.Value.Close();
         }
 
     }

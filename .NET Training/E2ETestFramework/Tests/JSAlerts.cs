@@ -23,22 +23,22 @@ namespace TestProject1.Locating_Web_Elements
         [Test]
         public void TestAlert()
         {
-            driver.Url = "https://rahulshettyacademy.com/AutomationPractice/";
-            driver.Manage().Window.Maximize();
+            driver.Value.Url = "https://rahulshettyacademy.com/AutomationPractice/";
+            driver.Value.Manage().Window.Maximize();
 
             //Basic Alert Buttonn
             //driver.FindElement(By.Id("alertbtn")).Click();
 
             //Add text  
-            driver.FindElement(By.Name("enter-name")).SendKeys("David Tzemach");
+            driver.Value.FindElement(By.Name("enter-name")).SendKeys("David Tzemach");
             //Conformation Alert button 
-            driver.FindElement(By.Id("confirmbtn")).Click();
+            driver.Value.FindElement(By.Id("confirmbtn")).Click();
 
             //Validate Alert syntax 
-            var alertText = driver.SwitchTo().Alert().Text;
+            var alertText = driver.Value.SwitchTo().Alert().Text;
             Assert.AreEqual("Hello David Tzemach, Are you sure you want to confirm?", alertText);
 
-            driver.SwitchTo().Alert().Accept();
+            driver.Value.SwitchTo().Alert().Accept();
 
             //More commands 
             //driver.SwitchTo().Alert().SendKeys("");
@@ -49,12 +49,12 @@ namespace TestProject1.Locating_Web_Elements
         public void test_actions()
         {
             //Change URL for this tests
-            driver.Url = "https://rahulshettyacademy.com/";
+            driver.Value.Url = "https://rahulshettyacademy.com/";
 
             //Actions 
-            Actions a = new Actions(driver);
-            a.MoveToElement(driver.FindElement(By.CssSelector("a.dropdown-toggle"))).Perform();
-            a.MoveToElement(driver.FindElement(By.XPath("//ul[@class='dropdown-menu']/li[1]/a"))).Click().Perform();
+            Actions a = new Actions(driver.Value);
+            a.MoveToElement(driver.Value.FindElement(By.CssSelector("a.dropdown-toggle"))).Perform();
+            a.MoveToElement(driver.Value.FindElement(By.XPath("//ul[@class='dropdown-menu']/li[1]/a"))).Click().Perform();
             Thread.Sleep(3000);
 
         }
@@ -62,7 +62,7 @@ namespace TestProject1.Locating_Web_Elements
         [TearDown]  
         public void closeBrowser()
         {
-            driver.Close();
+            driver.Value.Close();
         }
 
     }

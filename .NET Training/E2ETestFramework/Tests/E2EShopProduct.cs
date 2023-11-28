@@ -27,7 +27,7 @@ namespace TestProject1.Locating_Web_Elements
         {
             
             //Enter user name and password 
-            log_In_Page log_In_Page = new log_In_Page(driver);//Driver is from BASE class! 
+            log_In_Page log_In_Page = new log_In_Page(driver.Value);//Driver is from BASE class! 
             //Before:
             //log_In_Page.getUserName().SendKeys("rahulshettyacademy");
             //log_In_Page.getPassword().SendKeys("learning");
@@ -44,7 +44,7 @@ namespace TestProject1.Locating_Web_Elements
             log_In_Page.getSignInBtn().Click();
 
             //Page Object of ProductPage
-            ProductPage ProductsPurchese = new ProductPage(driver);
+            ProductPage ProductsPurchese = new ProductPage(driver.Value);
             //Add Explisit wait to make sure page is loaded (5S)
             ProductsPurchese.WaitForPageDisplay(5);
 
@@ -53,7 +53,7 @@ namespace TestProject1.Locating_Web_Elements
             //wait.Until(ExpectedConditions.ElementExists(By.CssSelector(".btn.btn-primary.nav-link")));
 
             //Now we moved to a new window:https://varonis.udemy.com/course/selenium-webdriver-with-csharp-nunit/learn/lecture/28145106#overview
-            Assert.AreEqual("https://rahulshettyacademy.com/angularpractice/shop", driver.Url);
+            Assert.AreEqual("https://rahulshettyacademy.com/angularpractice/shop", driver.Value.Url);
 
             //Select products using array of predefined products we will add
             string[] Preproducts = pr;
@@ -74,11 +74,11 @@ namespace TestProject1.Locating_Web_Elements
             }
 
             //Click on Checkout button 
-            driver.FindElement(By.CssSelector(".nav-link.btn.btn-primary")).Click();
+            driver.Value.FindElement(By.CssSelector(".nav-link.btn.btn-primary")).Click();
 
 
             //Validatet that the correct products are in cart
-            IList<IWebElement> productsInCart = driver.FindElements(By.CssSelector("h4 a"));
+            IList<IWebElement> productsInCart = driver.Value.FindElements(By.CssSelector("h4 a"));
 
             bool verification = false;
             foreach (var item in productsInCart)
@@ -97,21 +97,21 @@ namespace TestProject1.Locating_Web_Elements
             else { Assert.Fail("Test Failed"); }
 
             //Click on Checkout button  
-            driver.FindElement(By.CssSelector("button[class='btn btn-success']")).Click();
+            driver.Value.FindElement(By.CssSelector("button[class='btn btn-success']")).Click();
 
             //Add Text -> Select from Drop-Down
-            driver.FindElement(By.CssSelector("#country")).SendKeys("Ind");
+            driver.Value.FindElement(By.CssSelector("#country")).SendKeys("Ind");
             //wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("India")));
-            driver.FindElement(By.LinkText("India")).Click();
+            driver.Value.FindElement(By.LinkText("India")).Click();
 
             //approve checkout box
-            driver.FindElement(By.CssSelector(".checkbox.checkbox-primary")).Click();
+            driver.Value.FindElement(By.CssSelector(".checkbox.checkbox-primary")).Click();
 
             //Click on purches
-            driver.FindElement(By.CssSelector("input[value='Purchase']")).Click();
+            driver.Value.FindElement(By.CssSelector("input[value='Purchase']")).Click();
 
             //Approve 
-            string StringData = driver.FindElement(By.CssSelector(".alert.alert-success.alert-dismissible")).Text;
+            string StringData = driver.Value.FindElement(By.CssSelector(".alert.alert-success.alert-dismissible")).Text;
             StringAssert.Contains("Success", StringData);
         }
 
@@ -120,7 +120,7 @@ namespace TestProject1.Locating_Web_Elements
         {
 
             //Test will run 3 times, each time with specified confuguration
-            yield return new TestCaseData(jsonData.extractData("username"), jsonData.extractData("password"),, jsonData.extractDataArray("Products"));
+            yield return new TestCaseData(jsonData.extractData("username"), jsonData.extractData("password"), jsonData.extractDataArray("Products"));
             //yield return new TestCaseData("rahulshettyacademy", "X");
             //yield return new TestCaseData("Y", "learning");
             
