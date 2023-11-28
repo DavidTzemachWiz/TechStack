@@ -19,7 +19,7 @@ namespace TestProject1.Locating_Web_Elements
         public void FillAllInformation()
         {
             //Enter user name and password 
-            log_In_Page log_In_Page = new log_In_Page(driver);//Driver is from BASE class! 
+            log_In_Page log_In_Page = new log_In_Page(driver.Value);//Driver is from BASE class! 
 
             log_In_Page.getUserName().SendKeys("rahulshettyacademy");
             log_In_Page.getPassword().SendKeys("learning");
@@ -33,7 +33,7 @@ namespace TestProject1.Locating_Web_Elements
             log_In_Page.getSignInBtn().Click();
            
             //Now we moved to a new window:https://varonis.udemy.com/course/selenium-webdriver-with-csharp-nunit/learn/lecture/28145106#overview
-            Assert.AreEqual("https://rahulshettyacademy.com/loginpagePractise/", driver.Url);    
+            Assert.AreEqual("https://rahulshettyacademy.com/loginpagePractise/", driver.Value.Url);    
         }
     }
 }

@@ -23,29 +23,29 @@ namespace TestProject1.Locating_Web_Elements
         public void FillAllInformation()
         {
             //Enter user name and password 
-            driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
-            driver.FindElement(By.Id("password")).SendKeys("learning");
+            driver.Value.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
+            driver.Value.FindElement(By.Id("password")).SendKeys("learning");
 
             //Select Consultant in drop down
-            IWebElement dropdown = driver.FindElement(By.CssSelector("select.form-control"));
+            IWebElement dropdown = driver.Value.FindElement(By.CssSelector("select.form-control"));
             SelectElement choicse = new SelectElement(dropdown);
             choicse.SelectByValue("consult");
 
             //Click Sign-in button
-            driver.FindElement(By.Id("signInBtn")).Click();
+            driver.Value.FindElement(By.Id("signInBtn")).Click();
 
             //Add Explisit wait to make sure page is loaded (5S)
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementExists(By.CssSelector(".btn.btn-primary.nav-link")));
 
             //Now we moved to a new window:https://varonis.udemy.com/course/selenium-webdriver-with-csharp-nunit/learn/lecture/28145106#overview
-            Assert.AreEqual("https://rahulshettyacademy.com/angularpractice/shop", driver.Url);
+            Assert.AreEqual("https://rahulshettyacademy.com/angularpractice/shop", driver.Value.Url);
 
             //Select products using array of predefined products we will add
             string[] Preproducts = { "iphone X", "Blackberry" };
 
             //Create list of all products using product Tags
-            IList<IWebElement> products = driver.FindElements(By.TagName("app-card"));
+            IList<IWebElement> products = driver.Value.FindElements(By.TagName("app-card"));
 
             foreach (IWebElement item in products)
             {
@@ -58,11 +58,11 @@ namespace TestProject1.Locating_Web_Elements
             }
 
             //Click on Checkout button 
-            driver.FindElement(By.CssSelector(".nav-link.btn.btn-primary")).Click();
+            driver.Value.FindElement(By.CssSelector(".nav-link.btn.btn-primary")).Click();
 
 
             //Validatet that the correct products are in cart
-            IList<IWebElement> productsInCart = driver.FindElements(By.CssSelector("h4 a"));
+            IList<IWebElement> productsInCart = driver.Value.FindElements(By.CssSelector("h4 a"));
 
             bool verification = false;
             foreach (var item in productsInCart)
@@ -81,21 +81,21 @@ namespace TestProject1.Locating_Web_Elements
             else { Assert.Fail("Test Failed"); }
 
             //Click on Checkout button  
-            driver.FindElement(By.CssSelector("button[class='btn btn-success']")).Click();
+            driver.Value.FindElement(By.CssSelector("button[class='btn btn-success']")).Click();
 
             //Add Text -> Select from Drop-Down
-            driver.FindElement(By.CssSelector("#country")).SendKeys("Ind");
+            driver.Value.FindElement(By.CssSelector("#country")).SendKeys("Ind");
             wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("India")));
-            driver.FindElement(By.LinkText("India")).Click();
+            driver.Value.FindElement(By.LinkText("India")).Click();
 
             //approve checkout box
-            driver.FindElement(By.CssSelector(".checkbox.checkbox-primary")).Click();
+            driver.Value.FindElement(By.CssSelector(".checkbox.checkbox-primary")).Click();
 
             //Click on purches
-            driver.FindElement(By.CssSelector("input[value='Purchase']")).Click();
+            driver.Value.FindElement(By.CssSelector("input[value='Purchase']")).Click();
 
             //Approve 
-            string StringData = driver.FindElement(By.CssSelector(".alert.alert-success.alert-dismissible")).Text;
+            string StringData = driver.Value.FindElement(By.CssSelector(".alert.alert-success.alert-dismissible")).Text;
             StringAssert.Contains("Success", StringData);
         }
     }

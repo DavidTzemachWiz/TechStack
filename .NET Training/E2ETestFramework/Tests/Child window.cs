@@ -26,30 +26,30 @@ namespace TestProject1.Locating_Web_Elements
         [Test]
         public void ChildWindowUsingID ()
         {
-            driver.Url = "https://rahulshettyacademy.com/AutomationPractice/";
-            var link = driver.FindElement(By.PartialLinkText("Free Access to InterviewQues/"));
+            driver.Value.Url = "https://rahulshettyacademy.com/AutomationPractice/";
+            var link = driver.Value.FindElement(By.PartialLinkText("Free Access to InterviewQues/"));
 
-            Actions action = new Actions(driver);
+            Actions action = new Actions(driver.Value);
             action.KeyDown(Keys.Control).MoveToElement(link).Click().Perform();
-            driver.SwitchTo().Window(driver.WindowHandles[1]);
-            Assert.IsTrue(driver.Url == "https://rahulshettyacademy.com/documents-request");
+            driver.Value.SwitchTo().Window(driver.Value.WindowHandles[1]);
+            Assert.IsTrue(driver.Value.Url == "https://rahulshettyacademy.com/documents-request");
             Thread.Sleep(3000);
-            driver.SwitchTo().Window(driver.WindowHandles[0]);
-            Assert.IsTrue(driver.Url == "https://rahulshettyacademy.com/AutomationPractice/");
+            driver.Value.SwitchTo().Window(driver.Value.WindowHandles[0]);
+            Assert.IsTrue(driver.Value.Url == "https://rahulshettyacademy.com/AutomationPractice/");
         }
 
         [Test]
         public void ChildWindowUsingWindowHandle()
         {
-            var link = driver.FindElement(By.PartialLinkText("Free Access to InterviewQues/"));
+            var link = driver.Value.FindElement(By.PartialLinkText("Free Access to InterviewQues/"));
 
-            Actions action = new Actions(driver);
+            Actions action = new Actions(driver.Value);
             action.KeyDown(Keys.Control).MoveToElement(link).Click().Perform();
-            driver.SwitchTo().Window(driver.WindowHandles[1]);
-            Assert.IsTrue(driver.Url == "https://rahulshettyacademy.com/documents-request");
+            driver.Value.SwitchTo().Window(driver.Value.WindowHandles[1]);
+            Assert.IsTrue(driver.Value.Url == "https://rahulshettyacademy.com/documents-request");
             Thread.Sleep(3000);
-            driver.SwitchTo().Window(parentWindowHandle);
-            Assert.IsTrue(driver.Url == "https://rahulshettyacademy.com/AutomationPractice/");
+            driver.Value.SwitchTo().Window(parentWindowHandle);
+            Assert.IsTrue(driver.Value.Url == "https://rahulshettyacademy.com/AutomationPractice/");
         }
 
     }

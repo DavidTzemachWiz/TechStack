@@ -22,16 +22,16 @@ namespace TestProject1.Locating_Web_Elements
         [Test]
         public void FillAllInformaAtion()
         {
-            driver.Url = "https://rahulshettyacademy.com/seleniumPractise/#/offers";
+            driver.Value.Url = "https://rahulshettyacademy.com/seleniumPractise/#/offers";
             //Change from 5 rows to 10 
             //Select the Drop-Down Values 
-            IWebElement dropdown = driver.FindElement(By.Id("page-menu"));
+            IWebElement dropdown = driver.Value.FindElement(By.Id("page-menu"));
             SelectElement choicse = new SelectElement(dropdown);
             choicse.SelectByIndex(2);
 
             //step 1 - get all volues in column into array list A and sort it
             ArrayList A = new ArrayList();
-            IList<IWebElement> fruite = driver.FindElements(By.XPath("//td[1]"));
+            IList<IWebElement> fruite = driver.Value.FindElements(By.XPath("//td[1]"));
 
             foreach (var item in fruite)
             {
@@ -42,12 +42,12 @@ namespace TestProject1.Locating_Web_Elements
             A.Sort();
 
             //step 2 - Click on column header to sort
-            driver.FindElement(By.XPath("//th[1]")).Click();
+            driver.Value.FindElement(By.XPath("//th[1]")).Click();
 
 
             //step 3 - get all volues in column into array list B(Now its surted)
             ArrayList B = new ArrayList();
-           fruite = driver.FindElements(By.XPath("//td[1]"));
+           fruite = driver.Value.FindElements(By.XPath("//td[1]"));
             foreach (var item in fruite)
             {
                 TestContext.Progress.WriteLine(item.Text);

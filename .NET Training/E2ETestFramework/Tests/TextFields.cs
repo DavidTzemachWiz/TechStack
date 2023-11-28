@@ -16,9 +16,9 @@ namespace TestProject1
         [Test]
         public void Test_1_ValidateLogInLabel()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            var ValidateUserNamelabel = driver.FindElement(By.XPath("//label[@for='username' and @class='text-white' and text()='Username:']")).Text;
+            var ValidateUserNamelabel = driver.Value.FindElement(By.XPath("//label[@for='username' and @class='text-white' and text()='Username:']")).Text;
             Assert.AreEqual("Username:",ValidateUserNamelabel);
             TestContext.Progress.WriteLine("page Title is: " + ValidateUserNamelabel);
         }
@@ -26,14 +26,14 @@ namespace TestProject1
         public void Test_1_LogInPage_ErrorValidation()
         {
             //Enter user name and password 
-            driver.FindElement(By.Id("username")).SendKeys("Wrong Details");
-            driver.FindElement(By.Id("password")).SendKeys("Wrong Details");
+            driver.Value.FindElement(By.Id("username")).SendKeys("Wrong Details");
+            driver.Value.FindElement(By.Id("password")).SendKeys("Wrong Details");
 
             //Click on Submit 
-            driver.FindElement(By.Name("signin")).Click();
+            driver.Value.FindElement(By.Name("signin")).Click();
             Thread.Sleep(3000);
 
-            var Error = driver.FindElement(By.ClassName("alert-danger")).Text;
+            var Error = driver.Value.FindElement(By.ClassName("alert-danger")).Text;
             Assert.AreEqual("Incorrect username/password.", Error);
             //Or
             Assert.That(Error, Is.EqualTo("Incorrect username/password."));
@@ -43,7 +43,7 @@ namespace TestProject1
         [Test]
         public void ValidateCheckbox()
         {
-            IWebElement terms = driver.FindElement(By.Id("terms"));
+            IWebElement terms = driver.Value.FindElement(By.Id("terms"));
             TestContext.Progress.WriteLine("Is Checkbox selected? " +terms.Selected);//false
             terms.Click();
             TestContext.Progress.WriteLine("Is Checkbox selected? " + terms.Selected);//True 
@@ -53,7 +53,7 @@ namespace TestProject1
         public void DropDown()
         {
             //Select the Drop-Down Values 
-            IWebElement dropdown = driver.FindElement(By.CssSelector("select.form-control"));
+            IWebElement dropdown = driver.Value.FindElement(By.CssSelector("select.form-control"));
             SelectElement choicse = new SelectElement(dropdown);
 
             //Validate that drop does not allow MultySelction 
@@ -75,7 +75,7 @@ namespace TestProject1
             {
                 TestContext.Progress.WriteLine("Item in list: " +item.Text + " | " + item.Selected);
             }
-            driver.Close();
+            driver.Value.Close();
         }
     }
 }
