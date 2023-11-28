@@ -12,6 +12,8 @@ using OpenQA.Selenium.Edge;
 using AngleSharp;
 using System.Configuration;
 using System.Threading;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 
 
 namespace E2ETestFramework.Utilities_for_test_Framework
@@ -20,13 +22,20 @@ namespace E2ETestFramework.Utilities_for_test_Framework
     {
         string browsername;
 
+
         //Configure reports
+
+        ExtentReports extent;
         [OneTimeSetUp]//will run only once for all test 
         public void Setup()
         {
             string workingDirecory = Environment.CurrentDirectory;
             string projctDirectory = Directory.GetParent(workingDirecory).Parent.Parent.FullName;
-            var htmreporter = new ExtentHtmlReporter();
+            string reportPath = projctDirectory + "//index.html";
+            var htmReporter = new ExtentHtmlReporter(reportPath);
+            extent.AttachReporter(htmReporter);
+            extent.AddSystemInfo("Env", "QA");
+            extent.AddSystemInfo("Env", "Dev");
         }
      
        public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
@@ -34,6 +43,9 @@ namespace E2ETestFramework.Utilities_for_test_Framework
         [SetUp]// Will run prior each test 
         public void StartBrowser()
         {
+            //Create report
+            extent.CreateTest(TestContext.CurrentContext.Test.Name);
+
             //Global Configuration managmant 
             //First we check if it got the value from the terminal, if YEs it will use it
             //IF NOT he will use the data from the configuration file

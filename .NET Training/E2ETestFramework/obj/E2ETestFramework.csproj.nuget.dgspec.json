@@ -58,7 +58,7 @@
             },
             "ExtentReports": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[4.0.3, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",

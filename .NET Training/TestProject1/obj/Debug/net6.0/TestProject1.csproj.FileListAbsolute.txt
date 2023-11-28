@@ -14,6 +14,8 @@ C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProjec
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\TestProject1.runtimeconfig.json
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\TestProject1.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\TestProject1.pdb
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\AngleSharp.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\SeleniumExtras.WaitHelpers.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -25,8 +27,13 @@ C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProjec
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\NuGet.Frameworks.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\nunit.framework.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\WebDriver.Support.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\WebDriver.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\WebDriverManager.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\de\Microsoft.TestPlatform.CoreUtilities.resources.dll
@@ -94,6 +101,7 @@ C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProjec
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\obj\Debug\net6.0\TestProject1.csproj.AssemblyReference.cache
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\obj\Debug\net6.0\TestProject1.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\obj\Debug\net6.0\TestProject1.AssemblyInfoInputs.cache
@@ -105,11 +113,3 @@ C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProjec
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\obj\Debug\net6.0\TestProject1.pdb
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\obj\Debug\net6.0\TestProject1.genruntimeconfig.cache
 C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\obj\Debug\net6.0\ref\TestProject1.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\AngleSharp.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\System.Text.Encodings.Web.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\System.Text.Json.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\WebDriverManager.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\WebDriver.Support.dll
-C:\Users\User\Dropbox\PC (2)\Documents\GitHub\TechStack\.NET Training\TestProject1\bin\Debug\net6.0\SeleniumExtras.WaitHelpers.dll
