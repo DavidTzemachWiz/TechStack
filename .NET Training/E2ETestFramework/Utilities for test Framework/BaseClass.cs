@@ -14,7 +14,7 @@ using System.Configuration;
 using System.Threading;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
-
+using NUnit.Framework.Interfaces;
 
 namespace E2ETestFramework.Utilities_for_test_Framework
 {
@@ -88,6 +88,17 @@ namespace E2ETestFramework.Utilities_for_test_Framework
         [TearDown]
         public void QuitSssion()
         {
+            //Publish test results
+            var status = TestContext.CurrentContext.Result.Outcome.Status;
+            if (status == TestStatus.Failed)
+            {
+
+            }
+            else if (status == TestStatus.Passed)
+            {
+
+            }
+
             driver.Value.Quit();
         }
     }
