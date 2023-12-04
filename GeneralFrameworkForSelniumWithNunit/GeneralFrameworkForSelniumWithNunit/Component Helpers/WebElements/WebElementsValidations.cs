@@ -18,8 +18,21 @@ namespace GeneralFrameworkForSelniumWithNunit.Component_Helpers
             catch (Exception)
             {
                 return false;
+            } 
+        }
+
+        public static bool IsElementDisplayed(By locator, IWebDriver driver)
+        {
+            try
+            {
+                bool IsElementDisplayed = driver.FindElement(locator).Displayed;
+                return IsElementDisplayed;
             }
-            
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

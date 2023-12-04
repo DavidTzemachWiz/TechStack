@@ -2,6 +2,7 @@
 using AventStack.ExtentReports.Configuration;
 using AventStack.ExtentReports.Reporter;
 using GeneralFrameworkForSelniumWithNunit.Component_Helpers;
+using GeneralFrameworkForSelniumWithNunit.Component_Helpers.Test_Reporting;
 using GeneralFrameworkForSelniumWithNunit.TestHelpers;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -102,23 +103,25 @@ namespace GeneralFrameworkForSelniumWithNunit.Utilities
             string fileName = "ScreenShot-" + time.ToString("h_mm_ss") + ".png";
             if (status == TestStatus.Failed)
             {
-                test.Fail("Test Fail", CaptureScreenshot(driver.Value, fileName));
+                //test.Fail("Test Fail", CaptureScreenshot(driver.Value, fileName));
+                test.Fail("Test Fail", CaptureScreenshotForTests.CaptureScreenshots(driver.Value, fileName));
+                
                 test.Log(Status.Fail, "Test Fail with log trace" + stackTrace);
             }
             else if (status == TestStatus.Passed)
             {
-
+                
             }
             extent.Flush();
             BrowserCommands.Quit(driver.Value);         
         }
 
-        public MediaEntityModelProvider CaptureScreenshot(IWebDriver driver, string screenShotName)
-        {
-            ITakesScreenshot ts = (ITakesScreenshot)driver;
-            var screenshot = ts.GetScreenshot().AsBase64EncodedString;
-            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
-        }
+        //public MediaEntityModelProvider CaptureScreenshot(IWebDriver driver, string screenShotName)
+        //{
+        //    ITakesScreenshot ts = (ITakesScreenshot)driver;
+        //    var screenshot = ts.GetScreenshot().AsBase64EncodedString;
+        //    return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
+        //}
 
     }
 }
