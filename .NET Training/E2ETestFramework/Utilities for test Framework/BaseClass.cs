@@ -54,10 +54,11 @@ namespace E2ETestFramework.Utilities_for_test_Framework
             //Global Configuration managmant 
             //First we check if it got the value from the terminal, if YEs it will use it
             //IF NOT he will use the data from the configuration file
+            //
             browsername= TestContext.Parameters["browsername"];
             if (browsername == null)
             {
-                browsername = ConfigurationManager.AppSettings["browser"];
+                browsername = ConfigurationManager.AppSettings["browser"];              
             }
 
             

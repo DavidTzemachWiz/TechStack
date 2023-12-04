@@ -18,10 +18,21 @@ namespace MStest_TMP.Framework_Utilities
     [TestClass]
     public class BaseClass
     {
+
+        //Browser Options 
+        public static ChromeOptions ChromeOptions()
+        {
+            ChromeOptions option = new ChromeOptions();
+            option.AddArgument("start-maximized");
+            option.AddArgument("disable-infobars");
+            //option.AddArgument("incognito");
+            return option;
+        }
+
         //Create Browser type for test execution
         private static IWebDriver GetChromeDriver()
         {
-            var driver = new ChromeDriver();
+            var driver = new ChromeDriver(ChromeOptions());
             return driver;
         }
         private static IWebDriver GetEdgeDriver()
@@ -55,6 +66,15 @@ namespace MStest_TMP.Framework_Utilities
                 default:
                     throw new CustomeConfigErrors("Driver Not found: " + ObjectRepository.Config.GetBrowser().ToString());
                     break;
+            }   
+        }
+        [AssemblyCleanup]
+        public static void TearDown()
+        {
+            if (ObjectRepository.Driver != null)             
+            {
+                //ObjectRepository.Driver.Close();
+                ObjectRepository.Driver.Quit();
             }
         }
 
