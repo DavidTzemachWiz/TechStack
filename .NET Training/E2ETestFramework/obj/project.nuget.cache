@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "l4mNL3QK4yPKxfYpIoMXbkR5Bhkz7kGTOmc/90l+pOB357GIx0t9aQCJS2SgHk9URA+zm65OyeLAB+qYeYrSqA==",
+  "dgSpecHash": "E6LkNVBuqac+O+8YMNlMafygh1yBrAxQtjeo7eY3k2RHJ5S5WyehKzi+9tFHS92Gva/bE441fojA8Pj27EqaVg==",
   "success": true,
   "projectFilePath": "C:\\Users\\David\\Documents\\GitHub\\TechStack\\.NET Training\\E2ETestFramework\\E2ETestFramework.csproj",
   "expectedPackageFiles": [
@@ -201,10 +201,7 @@
     "C:\\Users\\David\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\David\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\David\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\webdrivermanager\\2.17.1\\webdrivermanager.2.17.1.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
-    "C:\\Users\\David\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
+    "C:\\Users\\David\\.nuget\\packages\\webdrivermanager\\2.17.1\\webdrivermanager.2.17.1.nupkg.sha512"
   ],
   "logs": []
 }

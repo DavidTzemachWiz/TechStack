@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeneralFrameworkForSelniumWithNunit")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29dbcad2c328472d9051b82959b1bf9d380bd17b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeneralFrameworkForSelniumWithNunit")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeneralFrameworkForSelniumWithNunit")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

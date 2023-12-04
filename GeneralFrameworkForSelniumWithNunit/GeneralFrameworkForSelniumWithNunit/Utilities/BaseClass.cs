@@ -1,6 +1,8 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Configuration;
 using AventStack.ExtentReports.Reporter;
+using GeneralFrameworkForSelniumWithNunit.Component_Helpers;
+using GeneralFrameworkForSelniumWithNunit.TestHelpers;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -54,15 +56,21 @@ namespace GeneralFrameworkForSelniumWithNunit.Utilities
                 browsername = System.Configuration.ConfigurationManager.AppSettings["browser"];
             }
 
-
             initBrowserByType(browsername);//Loaded from configuration file
 
+            //Option_1: hard Coded
+            //driver.Value.Navigate().GoToUrl("https://rahulshettyacademy.com/loginpagePractise/");
+            //driver.Value.Manage().Window.Maximize();
 
-            driver.Value.Navigate().GoToUrl("https://rahulshettyacademy.com/loginpagePractise/");//hard Coded
-            driver.Value.Manage().Window.Maximize();
+            //Option_2: BrowserCommand Class 
+            BrowserCommands.NevigateToUrl(driver.Value, System.Configuration.ConfigurationManager.AppSettings["TestSite"]);
+            BrowserCommands.MaxPage(driver.Value);
 
             //Implicit wait of 5 seconds for all elements 
-            driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            WaitHelpers.ImplicitWait(driver.Value, 5);
+
+
+            //driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
         }
 
         public void initBrowserByType(string browserType)
@@ -102,7 +110,7 @@ namespace GeneralFrameworkForSelniumWithNunit.Utilities
 
             }
             extent.Flush();
-            driver.Value.Quit();
+            BrowserCommands.Quit(driver.Value);         
         }
 
         public MediaEntityModelProvider CaptureScreenshot(IWebDriver driver, string screenShotName)
