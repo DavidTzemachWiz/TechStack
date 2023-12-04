@@ -58,7 +58,7 @@ namespace E2ETestFramework.Utilities_for_test_Framework
             browsername= TestContext.Parameters["browsername"];
             if (browsername == null)
             {
-                browsername = ConfigurationManager.AppSettings["browser"];              
+                browsername = ConfigurationManager.AppSettings["browser"];
             }
 
             
