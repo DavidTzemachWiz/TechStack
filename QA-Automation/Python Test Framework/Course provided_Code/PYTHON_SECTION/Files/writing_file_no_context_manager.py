@@ -1,5 +1,4 @@
 
-
 my_string = "I love to program in Python language"
 
 # example 1

@@ -1,5 +1,8 @@
 # https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
 # https://www.w3schools.com/cssref/css_selectors.asp
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 # css selector best selector after ID
 # fast for selenium next to ID
@@ -8,6 +11,9 @@
 
 # go to 'http://demostore.supersqa.com'
 
+driver = webdriver.Chrome()
+driver.get('http://demostore.supersqa.com')
+time.sleep(4)
 # =============================
 # Simply use id or class as css locator
 # '.' is for class

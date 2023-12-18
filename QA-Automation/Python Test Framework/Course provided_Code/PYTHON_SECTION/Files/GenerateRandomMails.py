@@ -1,5 +1,6 @@
 
-File_location = './'
+File_location = './GenerateRandomMails.py'
+
 """
 Exercises:
 Create a file with list of randomly generated email addresses.
