@@ -1,4 +1,4 @@
-# This file will contain diffent types of configs that we will use during POM and Tests
+# This file will contain different types of configs that we will use during POM and Tests
 
 import os
 
