@@ -1,6 +1,8 @@
 import pytest
 from selenium import webdriver
 import os
+from selenium.webdriver.chrome.options import Options as ChOptions
+from selenium.webdriver.firefox.options import Options as FxOptions
 
 # This file will contain the fixture for all tests in the framework
 
@@ -17,7 +19,7 @@ Session (Set up and torn down once for each test session i.e comprising one or m
 @pytest.fixture(scope="class")
 def init_driver(request):
     # Create list of supported browsers
-    supported_browsers = ['chrome', 'Edge', 'firefox']
+    supported_browsers = ['chrome','headlesschrome', 'Edge', 'firefox']
     # os.environ in Python is a mapping object that represents the user’s environmental variables. It returns a dictionary having user’s environmental variable as key and their values as value.
     browser = os.environ.get('BROWSER', None)
     # Create error structure if user selct an unsupported browser
@@ -33,6 +35,12 @@ def init_driver(request):
         driver = webdriver.Chrome()
     elif browser in ('firefox'):
         driver = webdriver.Firefox()
+    elif browser in ('headlesschrome'):
+        chrome_options = ChOptions()
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--headless')
+        driver = webdriver.Chrome(options=chrome_options)
     elif browser in ('Edge'):
         driver = webdriver.Edge()
 
