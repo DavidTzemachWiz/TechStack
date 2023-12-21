@@ -1,4 +1,5 @@
 import pytest
+import pytest_html
 from selenium import webdriver
 import os
 from selenium.webdriver.chrome.options import Options as ChOptions
@@ -19,7 +20,7 @@ Session (Set up and torn down once for each test session i.e comprising one or m
 @pytest.fixture(scope="class")
 def init_driver(request):
     # Create list of supported browsers
-    supported_browsers = ['chrome','headlesschrome', 'Edge', 'firefox']
+    supported_browsers = ['chrome', 'headlesschrome', 'Edge', 'firefox']
     # os.environ in Python is a mapping object that represents the user’s environmental variables. It returns a dictionary having user’s environmental variable as key and their values as value.
     browser = os.environ.get('BROWSER', None)
     # Create error structure if user selct an unsupported browser
@@ -53,3 +54,35 @@ def init_driver(request):
     # yield statement suspends a function’s execution and sends a value back to the caller,Yield can produce a sequence of values. 
     yield
     driver.quit()
+
+    import pytest_html
+
+    # This code will modify the default HTML report, Pytest will check it prior to run the tests
+
+
+## FOR: generating only pytest-html report
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    pytest_html = item.config.pluginmanager.getplugin("html")
+    outcome = yield
+    report = outcome.get_result()
+    extra = getattr(report, "extra", [])
+    if report.when == "call":
+        # always add url to report
+        xfail = hasattr(report, "wasxfail")
+        # check if test failed
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            is_frontend_test = True if 'init_driver' in item.fixturenames else False
+            if is_frontend_test:
+                results_dir = os.environ.get("RESULTS_DIR")
+                if not results_dir:
+                    raise Exception("Environment variable 'RESULTS_DIR' must be set.")
+
+                screen_shot_path = os.path.join(results_dir, item.name + '.png')
+                driver_fixture = item.funcargs['request']
+                driver_fixture.cls.driver.save_screenshot(screen_shot_path)
+                # only add additional html on failure
+                # extra.append(pytest_html.extras.html('<div style="background:orange;">Additional HTML</div>'))
+                extra.append(pytest_html.extras.image(screen_shot_path))
+
+        report.extra = extra
