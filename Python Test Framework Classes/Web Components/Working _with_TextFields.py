@@ -14,5 +14,30 @@ class Component_DropDown:
     url = 'https://automationteststore.com/index.php?rt=account/create'
     driver.get(url)
     
+
+def submit_text(driver, strategy, element_locator, text, timeout=10):
+    try:
+        # Wait for the element to be present
+        element = WebDriverWait(driver, timeout).until(
+            EC.presence_of_element_located((strategy, element_locator))
+        )
+
+        # Wait for the element to be clickable
+        WebDriverWait(driver, timeout).until(
+            EC.element_to_be_clickable((strategy, element_locator))
+        )
+
+        # Clear the existing text (optional, remove if not needed)
+        element.clear()
+
+        # Send the keys to the element
+        element.send_keys(text)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+#How to use? 
+#submit_text(driver=driver,strategy=By.ID,element_locator='AccountFrm_firstname',text= "TEST")
+
     
     
