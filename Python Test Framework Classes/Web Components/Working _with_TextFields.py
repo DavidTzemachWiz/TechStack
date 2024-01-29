@@ -1,19 +1,20 @@
 import time
+from telnetlib import EC
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import StaleElementReferenceException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
-class Component_DropDown:
+class Component_TextFields:
 
 # Initialize the WebDriver
     driver = webdriver.Chrome()
 
 # Navigate to the URL
-    url = 'https://automationteststore.com/index.php?rt=account/create'
-    driver.get(url)
-    
+url = 'https://automationteststore.com/index.php?rt=account/create'
+driver.get(url)
 
 def submit_text(driver, strategy, element_locator, text, timeout=10):
     try:
@@ -36,8 +37,5 @@ def submit_text(driver, strategy, element_locator, text, timeout=10):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-#How to use? 
-#submit_text(driver=driver,strategy=By.ID,element_locator='AccountFrm_firstname',text= "TEST")
-
-    
-    
+submit_text(driver=driver,strategy=By.ID,element_locator='AccountFrm_firstname',text= "TEST")
+time.sleep(2)
