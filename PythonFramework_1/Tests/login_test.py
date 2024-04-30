@@ -9,6 +9,7 @@ import Utils
 from Utils import utils as test_attributes  # Import test attributes from Utils package
 
 
+
 @pytest.mark.usefixtures("test_setup")  # Use the test_setup fixture defined in conftest.py
 class TestLogin():
     # Test case for login functionality
@@ -22,6 +23,7 @@ class TestLogin():
         login_page_object.ClickLogIn()  # Click the login button
 
     # Test case for logout functionality
+    @pytest.mark.smoke
     def test_logout(self):
         driver = self.driver  # Get the WebDriver instance from the test_setup fixture
         home_page_object = homePage(driver)  # Create HomePage object
