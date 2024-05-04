@@ -7,13 +7,15 @@ from POM.loginPage import LoginPage  # Import LoginPage class from POM package
 from POM.HomePage import homePage  # Import homePage class from POM package
 import Utils
 from Utils import utils as test_attributes  # Import test attributes from Utils package
-
+from Utils import browser_commands
+from Utils.browser_commands import SeleniumCommands
 
 
 @pytest.mark.usefixtures("test_setup")  # Use the test_setup fixture defined in conftest.py
 class TestLogin():
     # Test case for login functionality
     def test_login(self):
+
         driver = self.driver  # Get the WebDriver instance from the test_setup fixture
         driver.get(test_attributes.URL)  # Navigate to the specified URL
         time.sleep(5)  # Wait for 5 seconds (optional)

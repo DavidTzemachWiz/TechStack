@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChOptions
 from selenium.webdriver.firefox.options import Options as FxOptions
-
+from Utils.browser_commands import SeleniumCommands
 def pytest_addoption(parser):
     # Add a command line option to pytest for specifying the browser
     parser.addoption(
@@ -40,8 +40,10 @@ def test_setup(request):
         driver = webdriver.Chrome(options=chrome_options)
     else:
         raise ValueError("Unsupported browser option specified")  # Explicitly raise ValueError for unsupported options
-    driver.maximize_window()
+    selenium_commands = SeleniumCommands(driver)
+    selenium_commands.get_current_url()
     request.cls.driver = driver
+    selenium_commands.max_window()
     yield
-    driver.close()
-    driver.quit()
+    selenium_commands.close_browser()
+    selenium_commands.quit_browser()
